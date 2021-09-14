@@ -1,0 +1,35 @@
+
+
+## For xarm6
+
+export ROBOT_MODEL="xarm6_robot"
+export ROBOT_XACRO=`rospack find xarm_description`/urdf/"$ROBOT_MODEL".urdf.xacro
+export ROBOT_OUT=`rospack find xarm_description`/robots/"$ROBOT_MODEL"
+
+rosrun xacro xacro $ROBOT_XACRO > "$ROBOT_OUT".urdf
+
+
+## For xarm6_box_base
+
+export ROBOT_MODEL="xarm6_box_base"
+export ROBOT_XACRO=`rospack find xarm_description`/urdf/with_base/"$ROBOT_MODEL".urdf.xacro
+export ROBOT_OUT=`rospack find xarm_description`/robots/"$ROBOT_MODEL"
+
+rosrun xacro xacro $ROBOT_XACRO > "$ROBOT_OUT".urdf
+
+## For xarm6_box_base2
+
+export ROBOT_MODEL="xarm6_box_base2"
+export ROBOT_XACRO=`rospack find xarm_description`/urdf/with_base/"$ROBOT_MODEL".urdf.xacro
+export ROBOT_OUT=`rospack find xarm_description`/robots/"$ROBOT_MODEL"
+
+rosrun xacro xacro $ROBOT_XACRO > "$ROBOT_OUT".urdf
+
+## For xarm6_box_base2_ee
+
+export ROBOT_MODEL="xarm6_box_base2_ee"
+export ROBOT_XACRO=`rospack find xarm_description`/urdf/with_base/"$ROBOT_MODEL".urdf.xacro
+export ROBOT_OUT=`rospack find xarm_description`/robots/"$ROBOT_MODEL"
+
+rosrun xacro xacro $ROBOT_XACRO > "$ROBOT_OUT".urdf
+

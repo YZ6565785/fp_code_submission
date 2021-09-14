@@ -1,0 +1,5 @@
+install openrave on ubuntu 18.04
+
+go to this repo: https://github.com/crigroup/openrave-installation
+
+follow the instruction...

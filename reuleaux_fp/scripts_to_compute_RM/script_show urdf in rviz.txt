@@ -1,0 +1,9 @@
+
+
+
+export MYROBOT_NAME="ur5_robot"
+roslaunch urdf_tutorial display.launch model:=`rospack find show_urdf`/urdf/"$MYROBOT_NAME".urdf gui:=ture
+
+
+export MYROBOT_NAME="xarm6_robot"
+roslaunch urdf_tutorial display.launch model:=`rospack find show_urdf`/urdf/"$MYROBOT_NAME".urdf gui:=ture

@@ -1,0 +1,91 @@
+
+export MYROBOT_NAME="ur5_robot"
+
+export BASE_LINK="2"
+export EEF_LINK="9"
+
+export PLANNING_GROUP="ur5_robot"
+
+export IKFAST_OUTPUT_PATH=`pwd`/ikfast61_"$PLANNING_GROUP"_ur5.cpp
+
+python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py --robot="$MYROBOT_NAME".dae --iktype=transform6d --baselink="$BASE_LINK" --eelink="$EEF_LINK" --savefile="$IKFAST_OUTPUT_PATH"
+
+
+## For xarm6_box_base
+
+export ROBOT_PATH=`rospack find xarm_description`/urdf/with_base/
+export MYROBOT_NAME=$ROBOT_PATH"xarm6_box_base"
+export BASE_LINK="1"
+export EEF_LINK="10"
+export PLANNING_GROUP="xarm6_box_base"
+export IKFAST_OUTPUT_PATH=`pwd`/ikfast61_"$PLANNING_GROUP".cpp
+
+export IKFAST_PRECISION="5"
+cp "$MYROBOT_NAME".dae "$MYROBOT_NAME".backup.dae  # create a backup of your full precision dae.
+rosrun moveit_kinematics round_collada_numbers.py "$MYROBOT_NAME".dae "$MYROBOT_NAME".dae "$IKFAST_PRECISION"
+
+python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py \
+--robot="$MYROBOT_NAME".dae \
+--iktype=transform6d \
+--baselink="$BASE_LINK" \
+--eelink="$EEF_LINK" \
+--savefile="$IKFAST_OUTPUT_PATH"
+
+## For xarm6_box_base2
+
+export PLANNING_GROUP="xarm6_box_base2"
+export ROBOT_PATH=`rospack find xarm_description`/urdf/with_base/
+export MYROBOT_NAME=$ROBOT_PATH"$PLANNING_GROUP"
+export BASE_LINK="1"
+export EEF_LINK="10"
+
+export IKFAST_OUTPUT_PATH=`rospack find map_creator`/include/map_creator/ikfast61_"$PLANNING_GROUP".cpp
+
+export IKFAST_PRECISION="5"
+cp "$MYROBOT_NAME".dae "$MYROBOT_NAME".backup.dae  # create a backup of your full precision dae.
+rosrun moveit_kinematics round_collada_numbers.py "$MYROBOT_NAME".dae "$MYROBOT_NAME".dae "$IKFAST_PRECISION"
+
+python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py \
+--robot="$MYROBOT_NAME".dae \
+--iktype=transform6d \
+--baselink="$BASE_LINK" \
+--eelink="$EEF_LINK" \
+--savefile="$IKFAST_OUTPUT_PATH"
+
+
+### for xArm
+
+export MYROBOT_NAME="xarm6_robot"
+
+export BASE_LINK="1"
+export EEF_LINK="8"
+
+export PLANNING_GROUP="xarm6_robot"
+
+export IKFAST_OUTPUT_PATH=`pwd`/ikfast61_"$PLANNING_GROUP".cpp
+
+python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py \
+--robot="$MYROBOT_NAME".dae \
+--iktype=transform6d \
+--baselink="$BASE_LINK" \
+--eelink="$EEF_LINK" \
+--savefile="$IKFAST_OUTPUT_PATH"
+
+...
+
+### for iiwa14 -- 7DoF arm
+
+export MYROBOT_NAME="iiwa14"
+export BASE_LINK="1"
+export EEF_LINK="9"
+export PLANNING_GROUP="iiwa14"
+export FREE_INDEX="9"
+export IKFAST_OUTPUT_PATH=`pwd`/ikfast61_"$PLANNING_GROUP"_fixed_"$FREE_INDEX".cpp
+python `openrave-config --python-dir`/openravepy/_openravepy_/ikfast.py \
+--robot="$MYROBOT_NAME".dae \
+--iktype=transform6d \
+--baselink="$BASE_LINK" \
+--eelink="$EEF_LINK" \
+--freeindex="$FREE_INDEX" \
+--savefile="$IKFAST_OUTPUT_PATH"
+

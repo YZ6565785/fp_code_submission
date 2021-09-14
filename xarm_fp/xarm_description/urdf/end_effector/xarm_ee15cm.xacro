@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="xarm_ee" >
+
+  <xacro:macro name="load_ee" params="prefix:='' attach_to:='' ns:='xarm' xyz:='0 0 0' rpy:='0 0 0' effort_control:='false' velocity_control:='false' ">
+
+    <xacro:unless value="${attach_to == ''}">
+      <joint name="${prefix}ee_fix" type="fixed">
+        <parent link="${attach_to}"/>
+        <child link="${prefix}xarm_ee_base_link"/>
+        <origin xyz="${xyz}" rpy="${rpy}"/>
+      </joint>
+    </xacro:unless>
+
+    <link name="${prefix}xarm_ee_base_link">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>    
+        <geometry>
+          <cylinder radius="0.005" length="0.15"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.005" length="0.15"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0.0 0.0 0.0"/>
+        <mass value="1.0"/>
+        <inertia ixx="0.4541323333" ixy="0.0" ixz="0.0" iyy="0.6275323333" iyz="0.0" izz="0.3504833333"/>
+      </inertial>
+    </link>
+
+
+    <joint name="${prefix}ee_base_to_ee" type="fixed">
+        <parent link="${prefix}xarm_ee_base_link"/>
+        <child link="${prefix}xarm_ee"/>
+        <origin xyz="0 0 0.075" rpy="0 0 0"/>
+      </joint>
+    <link name="${prefix}xarm_ee"/>
+
+  </xacro:macro>
+</robot>

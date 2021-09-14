@@ -1,0 +1,8 @@
+<launch>
+  <arg name="robot" default="$(find xacro)/xacro '$(find xarm_description)/urdf/xarm6_robot.urdf.xacro'" />
+
+  <!-- send Panda urdf to parameter server -->
+  <param name="robot_description" command="$(arg robot)" />
+
+  <node name="check" pkg="map_creator" type="check" respawn="false" output="screen" />
+</launch>

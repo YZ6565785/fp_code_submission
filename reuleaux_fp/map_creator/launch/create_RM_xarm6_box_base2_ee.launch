@@ -1,0 +1,14 @@
+<launch>
+  <arg name="res" default="0.05" />
+  <arg name="output_name" default="default.h5" />
+  <!-- send Panda urdf to parameter server -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find xarm_description)/urdf/with_base/xarm6_box_base2_ee.urdf.xacro'" />
+
+  <!-- this planning context does not affect the collision checking, checked from check.launch -->
+  <!-- <include file="$(find xarm6_moveit_config)/launch/planning_context.launch"/> -->
+
+  <node name="create_reachability_map" pkg="map_creator" type="create_reachability_map" respawn="false" output="screen">
+    <param name="resolution" value="$(arg res)" />
+    <param name="output" value="$(arg output_name)" />
+  </node>
+</launch>

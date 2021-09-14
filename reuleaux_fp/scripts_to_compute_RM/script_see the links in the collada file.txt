@@ -1,0 +1,39 @@
+
+export MYROBOT_NAME="ur5_robot"
+
+openrave-robot.py "$MYROBOT_NAME".dae --info links
+
+
+...
+
+export MYROBOT_NAME="xarm6_robot"
+
+openrave-robot.py "$MYROBOT_NAME".dae --info links
+
+
+...
+
+export MYROBOT_NAME="iiwa14"
+
+openrave-robot.py "$MYROBOT_NAME".dae --info links
+
+
+## For xarm6_box_base
+
+export MYROBOT_NAME=`rospack find xarm_description`/urdf/with_base/"xarm6_box_base"
+
+openrave-robot.py "$MYROBOT_NAME".dae --info links
+
+## For xarm6_box_base2
+
+export MYROBOT_NAME=`rospack find xarm_description`/urdf/with_base/"xarm6_box_base2"
+
+openrave-robot.py "$MYROBOT_NAME".dae --info links
+
+
+## For xarm6_box_base2_ee
+
+export MYROBOT_NAME=`rospack find xarm_description`/urdf/with_base/"xarm6_box_base2_ee"
+
+openrave-robot.py "$MYROBOT_NAME".dae --info links
+

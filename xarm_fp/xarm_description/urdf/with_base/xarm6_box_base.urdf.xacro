@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="xarm6_box_base">
+  <xacro:arg name="prefix" default=""/>
+  <xacro:arg name="ros_namespace" default="xarm"/>
+  <xacro:arg name="limited" default="false"/>
+  <xacro:arg name="effort_control" default="false"/>
+  <xacro:arg name="velocity_control" default="false"/>
+  <xacro:arg name="attach_to" default="jackal_sim"/>
+
+  <!-- load xarm6 robot -->
+  <xacro:include filename="$(find xarm_description)/urdf/xarm6_robot_macro.xacro" />
+  <xacro:xarm6_robot prefix="$(arg prefix)" namespace="$(arg ros_namespace)" 
+    limited="$(arg limited)" effort_control="$(arg effort_control)" 
+    velocity_control="$(arg velocity_control)" attach_to="$(arg attach_to)" 
+    rpy="0 0 0" xyz="0.0 0.08 0.127"/>
+
+  <!-- <xacro:include filename="$(find earl_description)/end_effector/urdf/syringe_for_OR.urdf" /> -->
+
+  <link name="base_link"/>
+
+  <joint name="gr_to_jack" type="fixed">
+    <parent link="base_link"/>
+    <child link="jackal_sim"/>
+    <origin xyz="0.0 0.0 0.125" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="jackal_sim">
+    <visual>
+      <geometry>
+        <box size="0.508 0.430 0.25"/>
+      </geometry>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.508 0.430 0.25"/>
+      </geometry>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.0 0.0 0.0"/>
+      <mass value="17.0"/>
+      <inertia ixx="0.4541323333" ixy="0.0" ixz="0.0" iyy="0.6275323333" iyz="0.0" izz="0.3504833333"/>
+    </inertial>
+  </link>
+
+  <joint name="chassis_to_box" type="fixed">
+    <parent link="jackal_sim"/>
+    <child link="control_box"/>
+    <origin xyz="0.0 -0.07 0.159" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="control_box">
+    <visual>
+      <geometry>
+        <box size="0.18 0.145 0.068"/>
+      </geometry>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.18 0.145 0.068"/>
+      </geometry>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.0 0.0 0.0"/>
+      <mass value="1.6"/>
+      <inertia ixx="0.004936533333" ixy="0.0" ixz="0.0" iyy="0.007123333333" iyz="0.0" izz="0.003419866667"/>
+    </inertial>
+  </link>
+
+  
+
+</robot>
